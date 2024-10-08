@@ -1,3 +1,18 @@
+// Function to get URL parameters
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+// Set label text based on URL parameter
+window.onload = function () {
+    const labelTextParam = getQueryParam('label');
+    if (labelTextParam) {
+        document.getElementById('label-text').textContent = labelTextParam;
+    }
+};
+
+// Timer functions remain unchanged
 let currentTimer = null;
 
 function updateTimer(remainingSeconds, labelText) {
@@ -9,7 +24,7 @@ function updateTimer(remainingSeconds, labelText) {
         currentTimer = setTimeout(() => updateTimer(remainingSeconds - 1, labelText), 1000);
     } else {
         timerText.textContent = '';
-        document.getElementById('label-text').textContent = 'Sausage Roll';
+        document.getElementById('label-text').textContent = getQueryParam('label') || 'Sausage Roll';
     }
 }
 
